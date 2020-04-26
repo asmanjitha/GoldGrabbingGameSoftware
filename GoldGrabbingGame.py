@@ -8,6 +8,8 @@ class GoldGrabbingGame:
         self.playerCount = 0
         self.players = []
 
+    def setPlayerCount(self, playerCount):
+        self.playerCount = playerCount
 
     def getUserInputs(self):
         self.playerCount = int(input("Please enter number of players: "))
@@ -25,6 +27,10 @@ class GoldGrabbingGame:
         gameTree = Tree(vertices, bFactor)
         return gameTree
 
+    def initiateTreeByGUI(self, vertices, bFactor):
+        gameTree = Tree(vertices, bFactor)
+        return gameTree
+
 
     def getPlayers(self):
         return(self.players)
@@ -36,19 +42,29 @@ class GoldGrabbingGame:
 
     def game(self, tree):
         while True:
+            print(tree.getVertexCount())
             if tree.getVertexCount()<= 0:
                 break
-            leaves = tree.getLeaves()
-            tree.plotTree()
-            print("leaves: ", leaves)
-            tree.deleteLeaves()
-            while len(leaves) > 0:
-                for i in range (len(self.players)):
-                    player = self.players[0]
-                    if len(leaves) > 0:
-                        print("%s playing now" %player.getName())
-                        player.buyVertexGreedy(leaves)
-                        self.rotatePlayers()
+            elif tree.getVertexCount() == 1:
+                player = self.players[0]
+                leaves = tree.getLastNode()
+                print("%s playing now" % player.getName())
+                player.buyVertexGreedy(leaves)
+                break
+            else:
+                leaves = tree.getLeaves()
+                tree.plotTree()
+                print("leaves: ", leaves)
+                tree.deleteLeaves()
+                while len(leaves) > 0:
+                    for i in range (len(self.players)):
+                        if len(leaves) > 0:
+                            player = self.players[0]
+                            print("%s playing now" %player.getName())
+                            player.buyVertexGreedy(leaves)
+                            self.rotatePlayers()
+                        else:
+                            break
 
     def getResults(self):
         for player in self.players:
@@ -68,5 +84,14 @@ class GoldGrabbingGame:
             self.game(gameTree)
             print("\n ___________________RESULTS____________________________\n")
             self.getResults()
+
+
+    def startGameByGUI(self, players, vertices, bFactor):
+        self.setPlayerCount(players)
+        self.initiatePlayers()
+        gameTree = self.initiateTreeByGUI(vertices, bFactor)
+        self.game(gameTree)
+        print("\n ___________________RESULTS____________________________\n")
+        self.getResults()
 
 

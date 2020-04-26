@@ -21,6 +21,12 @@ class Tree:
         leaves = self.graph.vs.select(_degree=1)["label"] 
         return leaves
 
+    def getLastNode(self):
+        leaves = self.graph.vs["label"]
+        return leaves
+
+
+
     def deleteLeaves(self):
         leaves = self.graph.vs.select(_degree=1)
         self.graph.delete_vertices(leaves)
@@ -34,7 +40,7 @@ class Tree:
         plot(minTree)
 
     def getVertexCount(self):
-        return len(self.graph.vs["label"])
+        return len(VertexSeq(self.graph))
 
 
 

@@ -10,8 +10,16 @@ window.title("Gold Grabbing Game")
 
 def startGame():
     print("Starting Game.....")
-    game = GoldGrabbingGame()
-    game.startGame()
+    try:
+        players = int(playersNumberentry.get())
+        vertices = int(verticesNumberentry.get())
+        bFactor = int(branchingFactorEntry.get())
+
+        game = GoldGrabbingGame()
+        game.startGameByGUI(players, vertices, bFactor)
+    except:
+        print("Please Enter Correct Values")
+
 
 
 
