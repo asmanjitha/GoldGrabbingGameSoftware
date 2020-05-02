@@ -21,19 +21,13 @@ class Tree:
         leaves = self.graph.vs.select(_degree=1)["label"] 
         return leaves
 
-    def getLastNode(self):
-        leaves = self.graph.vs["label"]
-        return leaves
 
-
-
-    def deleteLeaves(self):
-        leaves = self.graph.vs.select(_degree=1)
+    def deleteLeaves(self, leaves):
         self.graph.delete_vertices(leaves)
 
-    def plotTree(self):
+    def plotTree(self, path):
         layout = self.graph.layout("rt")
-        plot(self.graph, layout=layout)
+        plot(self.graph, path + "/tree.svg", layout=layout )
 
     def plotMST(self):
         minTree = self.graph.spanning_tree()

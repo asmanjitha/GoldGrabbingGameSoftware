@@ -15,10 +15,10 @@ def startGame():
         vertices = int(verticesNumberentry.get())
         bFactor = int(branchingFactorEntry.get())
 
-        game = GoldGrabbingGame()
+        game = GoldGrabbingGame(resultsText)
         game.startGameByGUI(players, vertices, bFactor)
-    except:
-        print("Please Enter Correct Values")
+    except Exception as e:
+        print(e)
 
 
 
@@ -46,7 +46,7 @@ frameTop = tk.Frame()
 label = tk.Label(
     text="Gold Grabbing Game",
     width= 100,
-    height=10,
+    height=5,
     master=frameTop
     )
 
@@ -63,7 +63,7 @@ frameMiddleLeft = tk.Frame(master=frameMiddle1)
 label = tk.Label(
     text="Enter number of players: ",
     width= 40,
-    height=5,
+    height=2,
     master=frameMiddleLeft
     )
 
@@ -91,7 +91,7 @@ frameMiddleLeft = tk.Frame(master=frameMiddle2)
 label = tk.Label(
     text="Enter number of vertices: ",
     width= 40,
-    height=5,
+    height=2,
     master=frameMiddleLeft
     )
 
@@ -118,7 +118,7 @@ frameMiddleLeft = tk.Frame(master=frameMiddle3)
 label = tk.Label(
     text="Enter branching factor of the tree: ",
     width= 40,
-    height=5,
+    height=2,
     master=frameMiddleLeft
     )
 
@@ -138,20 +138,33 @@ frameMiddle3.pack()
 
 
 
-#---------------------BOTTOM FRAME-----------------------------------------------------------
+#---------------------RUN BUTTON-----------------------------------------------------------
 
-frameBottom = tk.Frame(borderwidth=10)
+frameRunButton = tk.Frame(borderwidth=10)
 button = tk.Button(
     text="Run Game!",
     width=25,
     height=2,
     bg="green",
     fg="white",
-    master=frameBottom
+    master=frameRunButton
 )
 button.bind("<Button-1>", startGameButtonPressed)
 button.pack()
+frameRunButton.pack()
+
+#---------------------BOTTOM FRAME-----------------------------------------------------------
+frameBottom = tk.Frame(borderwidth=20)
+resultsText = tk.Text(
+    master=frameBottom,
+    width=100,
+    height=25
+    )
+
+resultsText.pack()
+
 frameBottom.pack()
+
 
 #------------------------------END GUI-----------------------------------------------------------
 

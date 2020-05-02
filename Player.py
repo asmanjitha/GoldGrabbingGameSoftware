@@ -7,12 +7,26 @@ class Player:
         self.points = 0
         self.vertices = []
 
-    def buyVertexGreedy(self,leaves):
+    def buyVertexGreedy(self, leaves, tree):
         if len(leaves) > 0:
-            point = leaves.pop(leaves.index(max(leaves)))
+            point = 0
+            maxLeaf = None;
+            for leaf in leaves:
+                if int(leaf["label"]) > point:
+                    point = int(leaf["label"])
+                    maxLeaf = leaf
             self.vertices.append(point)
+            tree.deleteLeaves([maxLeaf])
             print("%s got %d points" %(self.getName(), point) )
-        return leaves
+
+
+    def playGreedy(self, tree):
+        if tree.getVertexCount() == 1:
+            leaves = tree.graph.vs
+            self.buyVertexGreedy(leaves, tree)
+        elif tree.getVertexCount() > 1:
+            leaves = tree.graph.vs.select(_degree=1)
+            self.buyVertexGreedy(leaves, tree)
 
     def setName(self, name):
         self.name = name

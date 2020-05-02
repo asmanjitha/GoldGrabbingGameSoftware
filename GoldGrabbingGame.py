@@ -2,11 +2,16 @@
 from Player import *
 from Tree import *
 
+from Logger import *
+
 class GoldGrabbingGame:
 
-    def __init__(self):
+    def __init__(self, *textBox):
         self.playerCount = 0
         self.players = []
+        self.logger = Logger(textBox)
+        self.gamePath = "Plottings/GoldGrabbingGame"
+
 
     def setPlayerCount(self, playerCount):
         self.playerCount = playerCount
@@ -40,31 +45,19 @@ class GoldGrabbingGame:
         self.players.append(element0)
 
 
-    def game(self, tree):
+    def singleGame(self, tree):
+        tree.plotTree()
         while True:
-            print(tree.getVertexCount())
+            # print(tree.getVertexCount())
             if tree.getVertexCount()<= 0:
                 break
-            elif tree.getVertexCount() == 1:
-                player = self.players[0]
-                leaves = tree.getLastNode()
-                print("%s playing now" % player.getName())
-                player.buyVertexGreedy(leaves)
-                break
             else:
-                leaves = tree.getLeaves()
-                tree.plotTree()
-                print("leaves: ", leaves)
-                tree.deleteLeaves()
-                while len(leaves) > 0:
-                    for i in range (len(self.players)):
-                        if len(leaves) > 0:
-                            player = self.players[0]
-                            print("%s playing now" %player.getName())
-                            player.buyVertexGreedy(leaves)
-                            self.rotatePlayers()
-                        else:
-                            break
+                # tree.plotTree()
+                player = self.players[0]
+                # print("%s playing now" % player.getName())
+                player.playGreedy(tree)
+                self.rotatePlayers()
+
 
     def getResults(self):
         for player in self.players:
@@ -72,7 +65,7 @@ class GoldGrabbingGame:
 
 
 
-    def startGame(self):
+    def startSingleGame(self):
         try:
             self.getUserInputs()
         except:
@@ -81,7 +74,7 @@ class GoldGrabbingGame:
             self.initiatePlayers()
             self.getPlayers()
             gameTree = self.initiateTree()
-            self.game(gameTree)
+            self.singleGame(gameTree)
             print("\n ___________________RESULTS____________________________\n")
             self.getResults()
 
@@ -90,8 +83,8 @@ class GoldGrabbingGame:
         self.setPlayerCount(players)
         self.initiatePlayers()
         gameTree = self.initiateTreeByGUI(vertices, bFactor)
-        self.game(gameTree)
-        print("\n ___________________RESULTS____________________________\n")
+        self.singleGame(gameTree)
+        # self.logger.writeLine("___________________RESULTS____________________________")
         self.getResults()
 
 
