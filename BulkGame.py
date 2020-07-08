@@ -1,4 +1,3 @@
-
 from Tree import *
 from Player import *
 import os
@@ -15,11 +14,11 @@ class BulkGame:
 
         self.results = {}
 
-        directory = str(max([int(i) for i in os.listdir("Plottings")]) + 1)
-        print(directory)
-        if not os.path.exists('Plottings/' + str(directory)):
-            os.makedirs('Plottings/' + str(directory))
-        self.root = "Plottings/" + str(directory)
+        # directory = str(max([int(i) for i in os.listdir("Plottings")]) + 1)
+        # print(directory)
+        # if not os.path.exists('Plottings/' + str(directory)):
+        #     os.makedirs('Plottings/' + str(directory))
+        # self.root = "Plottings/" + str(directory)
 
     def setPlayerCount(self, playerCount):
         self.playerCount = playerCount
@@ -32,9 +31,8 @@ class BulkGame:
 
     def initiateTree(self):
         gameTree = Tree(self.vertices, self.bFactor)
-        gameTree.plotTree(self.root)
+        # gameTree.plotTree(self.root)
         return gameTree
-
 
     def getPlayers(self):
         return (self.players)
@@ -54,7 +52,7 @@ class BulkGame:
 
     def getResults(self):
         for player in self.players:
-            self.results.update({player : player.calculatePoints()})
+            self.results.update({player: player.calculatePoints()})
         return self.results
 
     def startBulkGame(self):
@@ -69,9 +67,4 @@ class BulkGame:
             if player.calculatePoints() > winningPoints:
                 winningPoints = player.calculatePoints()
                 winner = player
-        return({winner.getName(): winningPoints})
-
-
-
-
-
+        return ({winner.getName(): winningPoints})

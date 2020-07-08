@@ -1,8 +1,8 @@
-
 from Player import *
 from Tree import *
 
 from Logger import *
+
 
 class GoldGrabbingGame:
 
@@ -12,18 +12,16 @@ class GoldGrabbingGame:
         self.logger = Logger(textBox)
         self.gamePath = "Plottings/GoldGrabbingGame"
 
-
     def setPlayerCount(self, playerCount):
         self.playerCount = playerCount
 
     def getUserInputs(self):
         self.playerCount = int(input("Please enter number of players: "))
 
-
     def initiatePlayers(self):
         for i in range(self.playerCount):
             player = Player()
-            player.setName(str("Player %d" %i))
+            player.setName(str("Player %d" % i))
             self.players.append(player)
 
     def initiateTree(self):
@@ -36,20 +34,18 @@ class GoldGrabbingGame:
         gameTree = Tree(vertices, bFactor)
         return gameTree
 
-
     def getPlayers(self):
-        return(self.players)
+        return (self.players)
 
     def rotatePlayers(self):
         element0 = self.players.pop(0)
         self.players.append(element0)
 
-
     def singleGame(self, tree):
         tree.plotTree()
         while True:
             # print(tree.getVertexCount())
-            if tree.getVertexCount()<= 0:
+            if tree.getVertexCount() <= 0:
                 break
             else:
                 # tree.plotTree()
@@ -58,12 +54,9 @@ class GoldGrabbingGame:
                 player.playGreedy(tree)
                 self.rotatePlayers()
 
-
     def getResults(self):
         for player in self.players:
-            print("%s : %d" %(player.getName(), player.calculatePoints()))
-
-
+            print("%s : %d" % (player.getName(), player.calculatePoints()))
 
     def startSingleGame(self):
         try:
@@ -78,7 +71,6 @@ class GoldGrabbingGame:
             print("\n ___________________RESULTS____________________________\n")
             self.getResults()
 
-
     def startGameByGUI(self, players, vertices, bFactor):
         self.setPlayerCount(players)
         self.initiatePlayers()
@@ -86,5 +78,3 @@ class GoldGrabbingGame:
         self.singleGame(gameTree)
         # self.logger.writeLine("___________________RESULTS____________________________")
         self.getResults()
-
-

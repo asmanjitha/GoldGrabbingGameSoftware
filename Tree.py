@@ -1,13 +1,13 @@
-
 from igraph import *
 import random
+
 
 class Tree:
     def __init__(self, vertices, bFactor):
         self.vertices = vertices
         self.bFactor = bFactor
 
-        self. labels = []
+        self.labels = []
         for i in range(100):
             val = random.randint(0, 1000)
             self.labels.append(val)
@@ -16,18 +16,17 @@ class Tree:
 
         self.graph.vs["label"] = self.labels
 
-
     def getLeaves(self):
-        leaves = self.graph.vs.select(_degree=1)["label"] 
+        leaves = self.graph.vs.select(_degree=1)["label"]
         return leaves
-
 
     def deleteLeaves(self, leaves):
         self.graph.delete_vertices(leaves)
 
-    def plotTree(self, path):
+    def plotTree(self):
         layout = self.graph.layout("rt")
-        plot(self.graph, path + "/tree.svg", layout=layout )
+        # plot(self.graph, path + "/tree.svg", layout=layout)
+        plot(self.graph, layout=layout)
 
     def plotMST(self):
         minTree = self.graph.spanning_tree()
@@ -35,7 +34,3 @@ class Tree:
 
     def getVertexCount(self):
         return len(VertexSeq(self.graph))
-
-
-
-

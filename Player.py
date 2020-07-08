@@ -1,5 +1,3 @@
-
-
 class Player:
 
     def __init__(self):
@@ -17,8 +15,7 @@ class Player:
                     maxLeaf = leaf
             self.vertices.append(point)
             tree.deleteLeaves([maxLeaf])
-            print("%s got %d points" %(self.getName(), point) )
-
+            # print("%s got %d points" %(self.getName(), point) )
 
     def playGreedy(self, tree):
         if tree.getVertexCount() == 1:
@@ -34,13 +31,6 @@ class Player:
     def getName(self):
         return self.name
 
-
     def calculatePoints(self):
         self.points = sum(self.vertices)
         return self.points
-
-
-
-
-
-
