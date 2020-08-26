@@ -14,8 +14,16 @@ def startGame():
         vertices = int(verticesNumberentry.get())
         bFactor = int(branchingFactorEntry.get())
 
-        game = GoldGrabbingGame(resultsText)
-        game.startGameByGUI(players, vertices, bFactor)
+        if players > 10:
+            print("!!! Please enter a value less than or equals 10 for number of players!!!")
+        elif vertices > 10000:
+            print("!!! Please enter a value less than 1000 for number of vertices!!!")
+        elif bFactor > 10:
+            print("!!! Please enter a value less than 10 for branching factor!!!")
+        else:
+            button.pack_forget()
+            game = GoldGrabbingGame(resultsText)
+            game.startGameByGUI(players, vertices, bFactor)
     except Exception as e:
         print(e)
 
@@ -30,16 +38,16 @@ def startGameButtonPressed(event):
 frameNavigator = tk.Frame()
 frameNavigator.pack(fill=tk.X, ipadx=5, ipady=5)
 
-btn_submit = tk.Button(master=frameNavigator, text="Demonstrate Game")
-btn_submit.pack(side=tk.LEFT, padx=10, ipadx=10)
-
-btn_clear = tk.Button(master=frameNavigator, text="Populate Data")
-btn_clear.pack(side=tk.LEFT, ipadx=10)
+# btn_submit = tk.Button(master=frameNavigator, text="Single Game")
+# btn_submit.pack(side=tk.LEFT, padx=10, ipadx=10)
+#
+# btn_clear = tk.Button(master=frameNavigator, text="Multiple Games")
+# btn_clear.pack(side=tk.LEFT, ipadx=10)
 
 # -------------------TOP FRAME-----------------------------------------------------------
 frameTop = tk.Frame()
 label = tk.Label(
-    text="Gold Grabbing Game",
+    text="Single Game",
     width=100,
     height=5,
     master=frameTop
@@ -137,8 +145,8 @@ button = tk.Button(
     text="Run Game!",
     width=25,
     height=2,
-    bg="green",
-    fg="white",
+    bg="#2ecc71",
+    fg="black",
     master=frameRunButton
 )
 button.bind("<Button-1>", startGameButtonPressed)
@@ -150,7 +158,7 @@ frameBottom = tk.Frame(borderwidth=20)
 resultsText = tk.Text(
     master=frameBottom,
     width=100,
-    height=25
+    height=1
 )
 
 resultsText.pack()

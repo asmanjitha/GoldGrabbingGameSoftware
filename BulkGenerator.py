@@ -5,15 +5,33 @@ import os
 class BulkGenerator:
     def __init__(self):
 
-        self.treeCount = int(input("Enter the number of games shoul be played: "))
-        self.playerCount = int(input("Enter the number of players in each game: "))
-        self.vertices = int(input("Enter the number of vertices for each game tree : "))
-        self.bFactor = int(input("Enter the branching factor for each tree: "))
+        # self.treeCount = int(input("Enter the number of games shoul be played: "))
+        # self.playerCount = int(input("Enter the number of players in each game: "))
+        # self.vertices = int(input("Enter the number of vertices for each game tree : "))
+        # self.bFactor = int(input("Enter the branching factor for each tree: "))
+        self.treeCount = 100
+        self.playerCount = 2
+        self.vertices = 10
+        self.bFactor = 2
         self.games = []
         self.winners = []
 
         if not os.path.exists('Plottings'):
             os.makedirs('Plottings')
+
+
+    def getUserData(self):
+        self.treeCount = int(input("Enter the number of games shoul be played: "))
+        self.playerCount = int(input("Enter the number of players in each game: "))
+        self.vertices = int(input("Enter the number of vertices for each game tree : "))
+        self.bFactor = int(input("Enter the branching factor for each tree: "))
+
+    def startByGUI(self, treeCount, playerCount, vertices, bFactor):
+        self.treeCount = treeCount
+        self.playerCount = playerCount
+        self.vertices = vertices
+        self.bFactor = bFactor
+        self.playGames()
 
     def calculateProbabilities(self):
         playersWinnigData = {}

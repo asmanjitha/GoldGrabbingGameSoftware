@@ -7,4 +7,7 @@ if __name__ == '__main__':
     # game.startSingleGame()
 
     generator = BulkGenerator()
+    generator.getUserData()
     generator.playGames()
+    # generator.startByGUI(10,2,10,2)
+    # input("Press enter to exit")

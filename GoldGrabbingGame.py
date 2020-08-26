@@ -42,7 +42,7 @@ class GoldGrabbingGame:
         self.players.append(element0)
 
     def singleGame(self, tree):
-        tree.plotTree()
+        # tree.plotTree()
         while True:
             # print(tree.getVertexCount())
             if tree.getVertexCount() <= 0:
